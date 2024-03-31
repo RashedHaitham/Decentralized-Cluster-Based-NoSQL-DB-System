@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  worker1:
+    build: ./Database
+    container_name: worker1
+    restart: always
+    ports:
+     - "9002:9000"
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.101
+
+  worker2:
+    build: ./Database
+    container_name: worker2
+    restart: always
+    ports:
+     - "9003:9000"
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.102
+
+  worker3:
+    build: ./Database
+    container_name: worker3
+    restart: always
+    ports:
+     - "9004:9000"
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.103
+
+  worker4:
+    build: ./Database
+    container_name: worker4
+    restart: always
+    ports:
+     - "9005:9000"
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.104
+
+  bootstrapper:
+    build: ./Bootstrapper
+    container_name: bootstrapper
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.105
+    depends_on:
+      - worker1
+      - worker2
+      - worker3
+      - worker4
+
+  bankingsystem:
+    build: ./BankingSystem
+    container_name: bankingsystem
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - bootstrapper
+    networks:
+      custom_network:
+        ipv4_address: 172.16.1.106
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/16
