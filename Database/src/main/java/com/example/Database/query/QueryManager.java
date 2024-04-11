@@ -98,7 +98,6 @@ public class QueryManager {
                 .add("document", document)
                 .add("X-Broadcast", isBroadcasted)
                 .build();
-        System.out.println(isBroadcasted);
         return execute(jsonObject);
     }
 

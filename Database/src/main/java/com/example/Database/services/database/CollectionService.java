@@ -41,8 +41,10 @@ public class CollectionService {
         Set<String> uniqueCollections = new HashSet<>();
         database.getCollectionLock().lock();
         try {
+            //soft reading
             List<String> inMemoryCollections = database.readCollections();
             uniqueCollections.addAll(inMemoryCollections);
+            //hard reading
             List<String> inFileCollections = DatabaseFileOperations.readCollections();
             uniqueCollections.addAll(inFileCollections);
             return new ArrayList<>(uniqueCollections);

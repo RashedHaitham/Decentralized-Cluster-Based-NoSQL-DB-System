@@ -18,7 +18,7 @@ public class BankAccount{
     private String clientName;
     private Double balance;
     private AccountTypes accountType;
-    private boolean status;
+    private Boolean status;
     private String password;
     private String _id;
 

@@ -1,0 +1,97 @@
+.radio-group label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.icon-btn:hover{
+    background-color: lightgray;
+    border-radius: 50%;
+    color: black;
+}
+
+#document-display {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    height: auto;
+    overflow: auto;
+    font-size: 20px;
+}
+
+.document-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+#document-display pre {
+    white-space: pre-wrap;
+    padding-left: 25px;
+    position: relative;
+}
+
+#document-display pre {
+    white-space: pre-wrap;
+    position: relative;
+}
+
+#document-display pre div {
+    background-color: #f0f0f0;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+#document-display pre div:hover {
+    background-color: #ddd;
+}
+
+#document-display pre strong {
+    color: black;
+    font-weight: bold;
+}
+
+#document-display pre span.property-value {
+    color: cornflowerblue;
+}
+
+#document-display {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    height: auto;
+    overflow: auto;
+    font-size: 20px;
+    display: none;
+}
+
+#choose-collection-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.collection-item.selected {
+    background-color: #e7e7e7;
+    position: relative;
+}
+
+.collection-item.selected::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #007bff;
+}
+
+
+#document-display:empty {
+    border: none;
+}

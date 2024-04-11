@@ -22,7 +22,7 @@ public class UserService {
     private void registerAdminWithBootstrapper() {
         String url = "http://host.docker.internal:8081/bootstrapper/add/admin";
         HttpHeaders headers = new HttpHeaders();
-        Admin admin = new Admin("admin", "admin@12345");
+        Admin admin = new Admin("admin", "admin@12");
         headers.set("username", admin.getUsername());
         headers.set("password", admin.getPassword());
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);

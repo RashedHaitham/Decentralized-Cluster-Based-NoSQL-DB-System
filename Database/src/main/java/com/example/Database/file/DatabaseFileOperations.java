@@ -147,6 +147,15 @@ public final class DatabaseFileOperations {
         return new ApiResponse("Document added successfully.", HttpStatus.CREATED);
     }
 
+    public static JSONObject readDocumentFromFile(String collectionName, int index) {
+        File collectionFile = FileService.getCollectionFile(collectionName);
+        JSONArray jsonArray = FileService.readJsonArrayFile(collectionFile);
+        if (jsonArray != null && index >= 0 && index < jsonArray.size()) {
+            return (JSONObject) jsonArray.get(index);
+        }
+        return null;
+    }
+
     private static int getDocumentIndex(String collectionName, String documentId, JSONArray jsonArray) throws Exception {
         File collectionFile = FileService.getCollectionFile(collectionName);
         JSONArray tempArray = FileService.readJsonArrayFile(collectionFile);
@@ -159,15 +168,6 @@ public final class DatabaseFileOperations {
         }
         jsonArray.addAll(tempArray);
         return Integer.parseInt(searchResult);
-    }
-
-    public static JSONObject readDocumentFromFile(String collectionName, int index) {
-        File collectionFile = FileService.getCollectionFile(collectionName);
-        JSONArray jsonArray = FileService.readJsonArrayFile(collectionFile);
-        if (jsonArray != null && index >= 0 && index < jsonArray.size()) {
-            return (JSONObject) jsonArray.get(index);
-        }
-        return null;
     }
 
     public static JSONObject deleteDocument(String collectionName, String documentId) {
@@ -208,10 +208,10 @@ public final class DatabaseFileOperations {
             if (!writeStatus) {
                 return new ApiResponse("Failed to update document.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            if (documentData.containsKey(propertyName)) {
-                indexManager.deleteFromPropertyIndex(collectionName, propertyName, documentData.get(propertyName).toString());
-            }
+
+            indexManager.deleteFromPropertyIndex(collectionName, propertyName, documentId);
             indexManager.insertIntoPropertyIndex(collectionName, propertyName, newValue.toString(), documentId);
+
             return new ApiResponse("Document with id " + documentId + " updated successfully in " + collectionName, HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ApiResponse("Error updating document property: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

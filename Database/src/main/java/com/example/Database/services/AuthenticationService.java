@@ -79,7 +79,7 @@ public class AuthenticationService {
                     String storedPassword = rootNode.path("password").asText();
                     if (identity.equals(storedIdentity) && hashedPassword.equals(storedPassword)) {
                         if (checkIfClosed(identity)){
-                            return new ApiResponse("Account closed,contact your bank to re-open.", HttpStatus.BAD_REQUEST);
+                            return new ApiResponse("Account closed, contact your bank to re-open.", HttpStatus.BAD_REQUEST);
                         }
                         return new ApiResponse("Authenticated", HttpStatus.OK);
                     }

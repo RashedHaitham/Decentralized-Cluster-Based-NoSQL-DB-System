@@ -83,7 +83,7 @@ public class DocumentController {
         propertiesToUpdate.put("status", document.get("status"));
         ApiResponse response=new ApiResponse("update failed",HttpStatus.BAD_REQUEST);
         for (Map.Entry<String, Object> entry : propertiesToUpdate.entrySet()) {
-                 response = queryManager.updateDocumentProperty(dbName,
+            response = queryManager.updateDocumentProperty(dbName,
                         collectionName,
                         documentId,
                         entry.getKey(), // Property name
@@ -100,8 +100,6 @@ public class DocumentController {
                     hashedPassword, // New value
                     isBroadcasted);
         }
-        System.out.println(response.getMessage());
-        System.out.println(response.getStatus());
         return ResponseEntity.status(response.getStatus()).body(response.getMessage());
     }
 

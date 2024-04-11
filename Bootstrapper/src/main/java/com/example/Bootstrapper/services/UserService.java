@@ -32,8 +32,10 @@ public class UserService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("accountNumber", customer.getAccountNumber());
         headers.set("password", customer.getPassword());
-        headers.set("adminUsername", "admin");
-        headers.set("adminPassword", "admin@12345");
+        Optional<Admin> adminCredentialsOpt = FileServices.getAdminCredentials();
+        Admin adminCredentials = adminCredentialsOpt.get();
+        headers.set("adminUsername", adminCredentials.getUsername());
+        headers.set("adminPassword", adminCredentials.getPassword());
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         RestTemplate restTemplate = new RestTemplate();
         System.out.println("sending customer with account number " + customer.getAccountNumber());

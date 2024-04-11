@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class IndexManager {
 
-    // ConcurrentHashMap to allow safe multi-threaded access to indexes
+    // ConcurrentHashMap to allow safe multithreading access to indexes
     private final Map<String, Index> indexMap = new ConcurrentHashMap<>();
     private final Map<String, PropertyIndex> propertyIndexMap = new ConcurrentHashMap<>();
     private static IndexManager instance;
