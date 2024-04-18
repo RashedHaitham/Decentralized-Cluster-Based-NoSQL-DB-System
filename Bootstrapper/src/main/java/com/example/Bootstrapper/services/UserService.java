@@ -66,7 +66,6 @@ public class UserService {
         String HashedPassword=PasswordHashing.hashPassword(password);
         FileServices.updateUserFromJson("customers", accountNumber,HashedPassword); //update user from bootstrapper's side
         String url = "http://" + loadBalancer.getUserNode(accountNumber).getNodeIP() + ":9000/api/update/customer";
-        System.out.println(url);
         Optional<Admin> adminCredentialsOpt = FileServices.getAdminCredentials();
         Admin adminCredentials = adminCredentialsOpt.get();
         HttpHeaders headers = new HttpHeaders();

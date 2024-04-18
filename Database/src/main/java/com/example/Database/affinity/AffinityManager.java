@@ -19,7 +19,7 @@ public class AffinityManager {
         System.out.println(currentWorkerName);
         try {
             this.currentWorkerNumber = Integer.parseInt(currentWorkerName.trim().replace("worker", ""));
-            System.out.println(currentWorkerNumber);
+            System.out.println("worker "+currentWorkerNumber);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid worker name format.");
         }

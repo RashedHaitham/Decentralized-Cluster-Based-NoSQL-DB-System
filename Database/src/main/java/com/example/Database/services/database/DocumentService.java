@@ -49,13 +49,10 @@ public class DocumentService {
                     ? Long.toString((Long) jsonData.get("accountNumber")).trim()
                     : document.getContent().get("accountNumber").toString().trim();
             if (!accountNumber.isEmpty()) {
-                System.out.println("acc num in create doc "+accountNumber);
-                System.out.println("create doc propIndxExist ?"+collectionName+" "+indexManager.propertyIndexExists(collectionName, "accountNumber"));
                 if (!indexManager.propertyIndexExists(collectionName, "accountNumber")) {
                     indexManager.createPropertyIndex(collectionName, "accountNumber");
                 }
                 String existingDocumentId = indexManager.searchInPropertyIndex(collectionName, "accountNumber", accountNumber);
-                System.out.println("create doc existingdocID? "+existingDocumentId);
                 if (existingDocumentId != null) {
                     return new ApiResponse("An account with the same account number already exists.", HttpStatus.CONFLICT);
                 }
